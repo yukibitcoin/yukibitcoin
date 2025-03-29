@@ -25,8 +25,8 @@ Currently deepening my knowledge in:
 ![Yuki's GitHub stats](https://github-readme-stats.vercel.app/api?username=yukibitcoin&show_icons=true&theme=dark)
 
 ## 📫 Connect With Me
-- Twitter: [@yukibitcoin](https://twitter.com/yukibitcoin)
-- LinkedIn: [Yuki](https://linkedin.com/in/yukibitcoin)
+- Twitter: [@yukibitcoin](https://twitter.com/yuki_eliot)
+- Telegram: [Yuki](https://t.me/yuki_eliot)
 
 ## ⚡ Fun Fact
 I mined my first Bitcoin back in 2013 using a laptop that I still keep as a souvenir!
