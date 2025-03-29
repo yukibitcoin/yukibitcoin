@@ -29,8 +29,8 @@
     "priority": 1,
     "action": { "type": "block" },
     "condition": {
-      "urlFilter": "youtube\\.com/.*/videoplayback|vimeo\\.com/.*/video/|dailymotion\\.com/.*/video/|jwplayer\\.com|brightcove\\.com",
-      "resourceTypes": ["xmlhttprequest", "sub_frame"]
+      "urlFilter": "youtube\\.com/.*/videoplayback|youtube\\.com/.*/(watch|embed)|youtu\\.be/|youtube-nocookie\\.com/|vimeo\\.com/.*/video/|dailymotion\\.com/.*/video/|jwplayer\\.com|brightcove\\.com",
+      "resourceTypes": ["xmlhttprequest", "sub_frame", "main_frame"]
     }
   },
   {
