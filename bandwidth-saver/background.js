@@ -77,7 +77,7 @@ function generateRules(settings) {
       priority: 1,
       action: { type: 'block' },
       condition: {
-        urlFilter: '||*.mp4|*.webm|*.mov|*.m4v|*.avi|*.flv|*.mkv|*.mpeg|*.3gp|*.ogg|*.ogv|*.ts',
+        urlFilter: '\\.mp4|\\.webm|\\.mov|\\.m4v|\\.avi|\\.flv|\\.mkv|\\.mpeg|\\.3gp|\\.ogg|\\.ogv|\\.ts',
         resourceTypes: ['other', 'xmlhttprequest', 'object', 'sub_frame']
       }
     });
@@ -88,7 +88,7 @@ function generateRules(settings) {
       priority: 1,
       action: { type: 'block' },
       condition: {
-        urlFilter: '||*hls*|*m3u8*|*mpd*|*dash*',
+        urlFilter: 'hls|m3u8|mpd|dash',
         resourceTypes: ['xmlhttprequest']
       }
     });
