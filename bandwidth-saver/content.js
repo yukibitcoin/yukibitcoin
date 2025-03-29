@@ -29,12 +29,16 @@ function getMediaSelectors() {
   
   if (settings.blockVideos) {
     selectors.push('video');
+    // Add YouTube-specific video elements
+    if (window.location.hostname.includes('youtube.com')) {
+      selectors.push('ytd-player', '#player-container', '.html5-video-player');
+    }
   }
   
   if (settings.blockIframes) {
-    selectors.push('iframe[src*="youtube"]', 'iframe[src*="vimeo"]', 
-                  'iframe[src*="dailymotion"]', 'iframe[src*="video"]', 
-                  'iframe[src*="player"]');
+    selectors.push('iframe[src*="youtube"]', 'iframe[src*="youtube-nocookie"]', 'iframe[src*="youtu.be"]',
+                  'iframe[src*="vimeo"]', 'iframe[src*="dailymotion"]', 'iframe[src*="video"]', 
+                  'iframe[src*="player"]', 'iframe[data-src*="youtube"]');
   }
   
   return selectors.join(', ');
@@ -58,6 +62,10 @@ function removeMediaElements() {
     mediaElements.forEach(el => {
       if (el.tagName.toLowerCase() === 'video') {
         estimatedBandwidth += 5 * 1024 * 1024; // 5MB in bytes
+      } else if (el.tagName.toLowerCase() === 'ytd-player' || 
+                el.id === 'player-container' || 
+                el.classList.contains('html5-video-player')) {
+        estimatedBandwidth += 10 * 1024 * 1024; // 10MB for YouTube players
       } else {
         estimatedBandwidth += 1 * 1024 * 1024; // 1MB in bytes
       }
@@ -76,7 +84,28 @@ function removeMediaElements() {
     });
     
     // Remove elements
-    mediaElements.forEach(el => el.remove());
+    mediaElements.forEach(el => {
+      // For YouTube-specific elements, we need to be careful about removal
+      if (window.location.hostname.includes('youtube.com') && 
+          (el.tagName.toLowerCase() === 'ytd-player' || 
+           el.id === 'player-container' || 
+           el.classList.contains('html5-video-player'))) {
+        // For YouTube elements, we can either hide them or replace with placeholder
+        el.style.display = 'none';
+        
+        // Optionally create a placeholder
+        const placeholder = document.createElement('div');
+        placeholder.textContent = 'Video blocked by Bandwidth Saver';
+        placeholder.style.padding = '20px';
+        placeholder.style.backgroundColor = '#f1f1f1';
+        placeholder.style.textAlign = 'center';
+        placeholder.style.border = '1px solid #ddd';
+        el.parentNode.insertBefore(placeholder, el);
+      } else {
+        // For other elements, we can safely remove them
+        el.remove();
+      }
+    });
   }
 }
 
